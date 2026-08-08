@@ -1,73 +1,191 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
+  const { login, user } = useAuth();
   const navigate = useNavigate();
 
-  const users = [
-    { username: "admin", password: "123", role: "admin" },
-    { username: "editor", password: "123", role: "editor" },
-    { username: "viewer", password: "123", role: "viewer" },
-  ];
+  // ========================================
+  // REDIRECT USER ACCORDING TO ROLE
+  // ========================================
 
-  const handleLogin = (e) => {
+  useEffect(() => {
+    if (user) {
+      if (user.role === "Admin") {
+        navigate("/admin", { replace: true });
+      } else if (user.role === "Editor") {
+        navigate("/editor", { replace: true });
+      } else if (user.role === "Viewer") {
+        navigate("/viewer", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    }
+  }, [user, navigate]);
+
+  // ========================================
+  // HANDLE LOGIN
+  // ========================================
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = users.find(
-      (u) =>
-        u.username === username &&
-        u.password === password
+    setError("");
+    setIsLoading(true);
+
+    const result = await login(
+      username,
+      password
     );
 
-    if (user) {
-      // Fake JWT Token
-      const token = btoa(
-        JSON.stringify({
-          username: user.username,
-          role: user.role,
-        })
-      );
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", user.role);
-
-      navigate("/dashboard");
-    } else {
-      setError("Invalid Username or Password");
+    if (!result.success) {
+      setError(result.message);
     }
+
+    setIsLoading(false);
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>Login Page</h1>
+    <div className="login-page">
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <div className="login-card">
 
-        <br /><br />
+        {/* ========================================
+            HEADER
+        ======================================== */}
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <h1>🔐 SecureAuth</h1>
 
-        <br /><br />
+        <h3>
+          JWT Authentication System
+        </h3>
 
-        <button type="submit">Login</button>
 
-        <p style={{ color: "red" }}>{error}</p>
-      </form>
+        {/* ========================================
+            LOGIN FORM
+        ======================================== */}
+
+        <form onSubmit={handleSubmit}>
+
+          {/* Username */}
+
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) =>
+              setUsername(e.target.value)
+            }
+            required
+            disabled={isLoading}
+          />
+
+
+          {/* Password */}
+
+          <input
+            type={
+              showPassword
+                ? "text"
+                : "password"
+            }
+            placeholder="Password"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+            required
+            disabled={isLoading}
+          />
+
+
+          {/* ========================================
+              SHOW PASSWORD
+          ======================================== */}
+
+          <div className="show-password">
+
+            <input
+              type="checkbox"
+              checked={showPassword}
+              onChange={() =>
+                setShowPassword(
+                  !showPassword
+                )
+              }
+              disabled={isLoading}
+            />
+
+            <span>
+              Show Password
+            </span>
+
+          </div>
+
+
+          {/* ========================================
+              ERROR MESSAGE
+          ======================================== */}
+
+          {error && (
+            <p className="error">
+              {error}
+            </p>
+          )}
+
+
+          {/* ========================================
+              LOGIN BUTTON
+          ======================================== */}
+
+          <button
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading
+              ? "Logging in..."
+              : "Login"}
+          </button>
+
+        </form>
+
+
+        {/* ========================================
+            DEMO ACCOUNTS
+        ======================================== */}
+
+        <div className="demo-users">
+
+          <h4>
+            Demo Accounts
+          </h4>
+
+          <p>
+            <strong>Admin:</strong>{" "}
+            admin / admin123
+          </p>
+
+          <p>
+            <strong>Editor:</strong>{" "}
+            editor / editor123
+          </p>
+
+          <p>
+            <strong>Viewer:</strong>{" "}
+            viewer / viewer123
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

@@ -2,14 +2,24 @@ import { Link } from "react-router-dom";
 
 function Unauthorized() {
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>Access Denied</h1>
+    <div className="unauthorized-container">
 
-      <p>You are not authorized to access this page.</p>
+      <div className="unauthorized-card">
 
-      <Link to="/dashboard">
-        <button>Back to Dashboard</button>
-      </Link>
+        <h1>403</h1>
+
+        <h2>Access Denied</h2>
+
+        <p>
+          Sorry! You don't have permission to access this page.
+        </p>
+
+        <Link to="/dashboard">
+          <button>Go Back to Dashboard</button>
+        </Link>
+
+      </div>
+
     </div>
   );
 }
