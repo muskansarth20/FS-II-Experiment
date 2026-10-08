@@ -1,0 +1,730 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0b1120;
+  color: #e5e7eb;
+}
+
+/* =========================================
+   MAIN BACKGROUND
+========================================= */
+
+.app-container {
+  min-height: 100vh;
+  padding: 45px 20px;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(59, 130, 246, 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 100%,
+      rgba(99, 102, 241, 0.12),
+      transparent 30%
+    ),
+    #0b1120;
+}
+
+/* =========================================
+   BACKGROUND ORBS
+========================================= */
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+}
+
+.orb-1 {
+  width: 350px;
+  height: 350px;
+  background: #2563eb;
+  top: -150px;
+  left: -100px;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: #4f46e5;
+  right: -100px;
+  top: 30%;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: #0891b2;
+  bottom: -100px;
+  left: 40%;
+}
+
+/* =========================================
+   MAIN DASHBOARD
+========================================= */
+
+.glass-card {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 38px;
+
+  background: rgba(17, 24, 39, 0.94);
+
+  border: 1px solid #263249;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  padding-bottom: 30px;
+  margin-bottom: 28px;
+
+  border-bottom: 1px solid #202b3f;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+
+  color: #f8fafc;
+
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats-container {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 28px;
+}
+
+.stat-box {
+  position: relative;
+
+  padding: 22px 24px;
+
+  background: #141d2f;
+
+  border: 1px solid #253149;
+
+  border-radius: 16px;
+
+  transition: 0.25s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+
+  border-color: #34445f;
+
+  background: #172238;
+}
+
+.stat-number {
+  display: block;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 12px;
+
+  font-weight: 500;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.text-green {
+  color: #34d399;
+}
+
+.text-orange {
+  color: #fbbf24;
+}
+
+/* =========================================
+   ADD TASK
+========================================= */
+
+.add-task-form {
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 25px;
+}
+
+.input-group {
+  position: relative;
+
+  flex: 1;
+}
+
+.task-input {
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 17px;
+
+  border-radius: 12px;
+
+  border: 1px solid #2b3952;
+
+  outline: none;
+
+  background: #0f172a;
+
+  color: #f8fafc;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.task-input::placeholder {
+  color: #64748b;
+}
+
+.task-input:hover {
+  border-color: #3a4a66;
+}
+
+.task-input:focus {
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.10);
+}
+
+.input-glow {
+  display: none;
+}
+
+/* =========================================
+   ADD BUTTON
+========================================= */
+
+.add-button {
+  height: 54px;
+
+  padding: 0 25px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+.add-button:hover {
+  background: #3b82f6;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.28);
+}
+
+.add-button:active {
+  transform: translateY(0);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-glow {
+  display: none;
+}
+
+/* =========================================
+   TASK LIST
+========================================= */
+
+.task-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/* =========================================
+   TASK CARD
+========================================= */
+
+.task-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  min-height: 72px;
+
+  padding: 15px 17px;
+
+  background: #111a2b;
+
+  border: 1px solid #202d43;
+
+  border-radius: 14px;
+
+  transition: 0.2s ease;
+}
+
+.task-item:hover {
+  background: #162137;
+
+  border-color: #33445f;
+
+  transform: translateX(3px);
+}
+
+.task-item.completed {
+  opacity: 0.6;
+}
+
+/* =========================================
+   CHECKBOX
+========================================= */
+
+.checkbox-wrapper {
+  width: 23px;
+
+  height: 23px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 2px solid #475569;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.checkbox-wrapper:hover {
+  border-color: #60a5fa;
+}
+
+.checkbox-wrapper.checked {
+  background: #2563eb;
+
+  border-color: #2563eb;
+}
+
+.checkbox-inner {
+  width: 7px;
+
+  height: 12px;
+
+  border-right: 2px solid white;
+
+  border-bottom: 2px solid white;
+
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+/* =========================================
+   TASK INFORMATION
+========================================= */
+
+.task-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.task-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.task-title {
+  color: #e2e8f0;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  word-break: break-word;
+}
+
+.completed .task-title {
+  color: #64748b;
+
+  text-decoration: line-through;
+}
+
+.task-meta {
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+/* =========================================
+   DELETE
+========================================= */
+
+.delete-button {
+  width: 38px;
+
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.delete-button:hover {
+  color: #f87171;
+
+  background: rgba(248, 113, 113, 0.08);
+
+  border-color: rgba(248, 113, 113, 0.15);
+}
+
+.trash-icon {
+  font-size: 17px;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.pagination-container {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+.page-button {
+  min-width: 42px;
+
+  height: 40px;
+
+  padding: 0 13px;
+
+  border-radius: 9px;
+
+  border: 1px solid #2b3952;
+
+  background: #111a2b;
+
+  color: #94a3b8;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  color: #ffffff;
+
+  border-color: #3b82f6;
+
+  background: #17233a;
+}
+
+.page-button:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.current-page {
+  color: #60a5fa;
+
+  font-weight: 700;
+}
+
+.page-divider {
+  color: #334155;
+}
+
+.total-pages {
+  color: #64748b;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading-container {
+  padding: 50px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.spinner {
+  width: 32px;
+
+  height: 32px;
+
+  border-radius: 50%;
+
+  border: 3px solid #263249;
+
+  border-top-color: #3b82f6;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty-state {
+  padding: 55px 20px;
+
+  text-align: center;
+
+  background: #111a2b;
+
+  border: 1px dashed #2b3952;
+
+  border-radius: 14px;
+}
+
+.empty-icon {
+  font-size: 38px;
+
+  margin-bottom: 12px;
+
+  opacity: 0.7;
+}
+
+.empty-text {
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .app-container {
+    padding: 20px 12px;
+  }
+
+  .glass-card {
+    padding: 25px 18px;
+
+    border-radius: 18px;
+  }
+
+  .header {
+    padding-bottom: 22px;
+  }
+
+  .title {
+    font-size: 29px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .stats-container {
+    gap: 10px;
+  }
+
+  .stat-box {
+    padding: 18px 15px;
+  }
+
+  .stat-number {
+    font-size: 25px;
+  }
+
+  .add-task-form {
+    flex-direction: column;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .task-item {
+    padding: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .glass-card {
+    padding: 20px 14px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .task-title {
+    font-size: 13px;
+  }
+
+  .delete-button {
+    width: 34px;
+    height: 34px;
+  }
+}
